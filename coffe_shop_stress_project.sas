@@ -24,10 +24,10 @@ QUIT;
 
 /*Another way to create a parameter is shown in below.*/
 
-	data _null_;
+data _null_;
     set parameter_table;
-		call symputx('parmeter',change_value,"g");
-	run;
+	call symputx('parmeter',change_value,"g");
+run;
   
   
 /*Then we can easily change our datasets with the parameter that we assigned.*/  
