@@ -12,6 +12,8 @@ than SAS and there is not a big difference of the process time between SAS and S
 
 /* */
 
+%macro apply_change_value;
+
 /*This part creates a parameter to use in our SQL code.*/
 
 PROC SQL;
@@ -41,8 +43,11 @@ left join coffe_cost cost on order.coffe_type=cost.coffe_type;
 
 QUIT; 
 
+%mend;
 
+/*Because we wrote a macro thus we have to call it to use it.*/
 
+%apply_change_value;
 
 
 
