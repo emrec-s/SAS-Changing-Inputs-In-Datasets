@@ -16,34 +16,34 @@ than SAS and there is not a big difference of the process time between SAS and S
 
 /*This part creates a parameter to use in our SQL code.*/
 
-PROC SQL;
+	PROC SQL;
 
-select change_value into:parmeter
-from parameter_table
-where ID.parameter_table="V01";
+	select change_value into:parmeter
+	from parameter_table
+	where ID.parameter_table="V01";
 
-QUIT;
+	QUIT;
 
-/*Another way to create a parameter is shown in below.*/
+	/*Another way to create a parameter is shown in below.*/
 
-data _null_;
-    set parameter_table;
-	call symputx('parmeter',change_value,"g");
-run;
-  
-  
-/*Then we can easily change our datasets with the parameter that we assigned.*/  
+	data _null_;
+	    set parameter_table;
+		call symputx('parmeter',change_value,"g");
+	run;
 
-PROC SQL;
 
-create table costs_of_orders as
-select order.*, cost.*, (usage_amount.order/amount.cost)*price.order as cost_of_order
-from coffee_order order
-left join coffe_cost cost on order.coffe_type=cost.coffe_type;
+	/*Then we can easily change our datasets with the parameter that we assigned.*/  
 
-QUIT; 
+	PROC SQL;
 
-%mend;
+	create table costs_of_orders as
+	select order.*, cost.*, (usage_amount.order/amount.cost)*price.order as cost_of_order
+	from coffee_order order
+	left join coffe_cost cost on order.coffe_type=cost.coffe_type;
+
+	QUIT; 
+
+%mend apply_change_value;
 
 /*Because we wrote a macro thus we have to call it to use it.*/
 
