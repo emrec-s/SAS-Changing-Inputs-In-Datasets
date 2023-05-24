@@ -1,7 +1,10 @@
 /*About PROC SQL*/
 
-/*Firsty Proc SQL is one of the tools that is used in SAS. It is realy easy to use and understand the SAS 
-even if you don't know the fundemantal of SAS programming. Also sometimes it is better to use sql rather 
+/* Proc SQL is one of the tools that is used in SAS. 
+
+It is easy to use and understand the SAS if you know SQL even if you don't know the fundemantal of SAS programming. 
+
+Also sometimes it is better to use sql rather 
 than SAS and there is not a big difference of the process time between SAS and SQL codes. If the code is designed well it will work well.*/ 
 
 /*Let's assume that there are two datasets: coffee_order, coffe_cost, and coffe_supply. These datasets should be collected from a coffe shop. */
@@ -10,7 +13,15 @@ than SAS and there is not a big difference of the process time between SAS and S
 
 /*SAS is one of the easiest tools that manipulates the dataset by using tables.*/
 
-/* */
+/*Here a input table for manipulating:         */
+
+
+
+
+
+
+
+/*Then we use this table to change values*/
 
 %macro apply_change_value;
 
