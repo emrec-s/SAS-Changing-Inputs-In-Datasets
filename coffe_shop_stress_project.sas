@@ -46,6 +46,8 @@ Cappuccino 1 2.0
 run;
 
 
+%let parameter = 10;
+
 %macro apply_change_value;
 
 	/*This part creates a parameter to use in our SQL code.*/
@@ -53,15 +55,13 @@ run;
 
 	* Step 2: Let's stress the values;
 
-	%let parameter = 10;
 
-	QUIT;
 
 	/*Another way to create a parameter is shown in below.*/
 
 	data _null_;
 	    set parameter_table;
-	    call symputx('parmeter',change_value,"g");
+	    call symputx('parameter',change_value,"g");
 	run;
 
 
