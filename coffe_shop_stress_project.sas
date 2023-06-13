@@ -16,22 +16,44 @@ than SAS and there is not a big difference of the process time between SAS and S
 /*Here a input table for manipulating:         */
 
 
-
-
-
-
-
 /*Then we use this table to change values*/
+
+
+
+* Step 1: Create the dataset;
+
+
+
+data coffee_order;
+    input order_id coffe_type $ usage_amount price;
+    datalines;
+1 Espresso 10 2.5
+2 Latte 5 3.5
+3 Cappuccino 7 3.0
+4 Espresso 3 2.5
+5 Latte 2 3.5
+6 Cappuccino 6 3.0
+;
+run;
+
+data coffe_cost;
+    input coffe_type $ amount cost;
+    datalines;
+Espresso 1 1.0
+Latte 1 1.5
+Cappuccino 1 2.0
+;
+run;
+
 
 %macro apply_change_value;
 
-/*This part creates a parameter to use in our SQL code.*/
+	/*This part creates a parameter to use in our SQL code.*/
 
-	PROC SQL;
 
-	select change_value into:parmeter
-	from parameter_table
-	where ID.parameter_table="V01";
+	* Step 2: Let's stress the values;
+
+	%let parameter = 10;
 
 	QUIT;
 
@@ -39,7 +61,7 @@ than SAS and there is not a big difference of the process time between SAS and S
 
 	data _null_;
 	    set parameter_table;
-		call symputx('parmeter',change_value,"g");
+	    call symputx('parmeter',change_value,"g");
 	run;
 
 
@@ -48,11 +70,15 @@ than SAS and there is not a big difference of the process time between SAS and S
 	PROC SQL;
 
 	create table costs_of_orders as
-	select order.*, cost.*, (usage_amount.order/amount.cost)*price.order as cost_of_order
+	select order.*, cost.*, (order.usage_amount/cost.amount)*order.price as cost_of_order
 	from coffee_order order
 	left join coffe_cost cost on order.coffe_type=cost.coffe_type;
 
 	QUIT; 
+	
+	
+	
+	
 
 %mend apply_change_value;
 
