@@ -76,7 +76,10 @@ run;
 
 	QUIT; 
 	
-	
+	data costs_of_orders
+	set costs_of_orders
+	costs_of_order=costs_of_orders*&param.;
+	run;
 	
 	
 
